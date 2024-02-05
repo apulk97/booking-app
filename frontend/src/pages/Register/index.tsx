@@ -27,10 +27,7 @@ function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await dispatch(signup(formData));
-      // Handle success (if needed)
-      console.log("Signup successful");
-      navigate("/"); // Redirect to home page, for example
+      await dispatch(signup({formData, navigate}));
     } catch (error) {
       // Handle error (if needed)
       console.error("Signup failed", error);
@@ -79,7 +76,6 @@ function Register() {
             onChange={(e) => updateForm("password", e.target.value)}
           />
         </div>
-        <p>{formData.firstName}</p>
         <div className="footer">
           <input type="submit" value={'Sign Up'} />
         </div>

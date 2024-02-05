@@ -1,8 +1,13 @@
-import React from 'react'
+import { Link } from "react-router-dom"
 
 function Home() {
+  const profile = JSON.parse(localStorage.getItem('profile') || '')
+  const name: string = profile?.name || ''
   return (
-    <div>Home</div>
+    <>
+    <div>Hi, {name}</div>
+    <Link to="/signin">Sign in</Link>
+    </>
   )
 }
 
