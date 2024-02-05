@@ -1,0 +1,29 @@
+.main {
+    border: 1px solid ;
+    height: 300px;
+    width: 300px;
+    padding: 16px;
+    flex-direction: column;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.input {
+    width: 98%;
+    height: 30px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    font-size: 10px;
+}
