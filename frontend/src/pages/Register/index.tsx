@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./register.css";
 import { UserInterface } from "./index.types";
+import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom'
+import { RootState, AppDispatch } from "../../store";
+import { signup } from "../../slices/authSlice";
 
 function Register() {
   const initialVal: UserInterface = {
@@ -10,13 +14,27 @@ function Register() {
     password: "",
   };
   const [formData, setFormData] = useState<UserInterface>(initialVal);
+  let navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch()
+  const { authData, loading } = useSelector((state: RootState) => state.auth)
+  console.log(authData, loading);
+  
 
   const updateForm = (key: string, val: string): void => {
     setFormData((prev) => ({ ...prev, [key]: val }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    try {
+      await dispatch(signup(formData));
+      // Handle success (if needed)
+      console.log("Signup successful");
+      navigate("/"); // Redirect to home page, for example
+    } catch (error) {
+      // Handle error (if needed)
+      console.error("Signup failed", error);
+    }
   }
 
   return (

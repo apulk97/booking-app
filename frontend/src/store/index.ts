@@ -1,6 +1,5 @@
-import { applyMiddleware, configureStore } from "@reduxjs/toolkit";
+import {  configureStore } from "@reduxjs/toolkit";
 import saveUserData from "../slices/authSlice";
-import thunk  from "redux-thunk";
 const store = configureStore({
   reducer: {
     auth: saveUserData,
