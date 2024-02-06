@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from 'mongoose';
 
 import userRoutes from './routes/users';
+import hotelRoutes from './routes/hotels'
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/users', userRoutes)
+app.use('/hotels', hotelRoutes)
+
 
 app.listen(7000, () => {
     console.log('Server is listening on PORT 7000')

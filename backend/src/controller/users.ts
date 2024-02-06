@@ -19,7 +19,10 @@ export const signin = async (req: Request, res: Response) => {
         expiresIn: "1d",
       });
       return res.status(200).json({result: existingUser, token})
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };
 
 export const signup = async (req: Request, res: Response) => {
