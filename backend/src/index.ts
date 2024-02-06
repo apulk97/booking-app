@@ -22,5 +22,5 @@ app.use('/hotels', hotelRoutes)
 
 
 app.listen(8000, () => {
-    console.log('Server is listening on PORT 7000')
+    console.log('Server is listening on PORT 8000')
 });
