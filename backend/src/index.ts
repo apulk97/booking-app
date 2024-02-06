@@ -4,7 +4,7 @@ import express from "express";
 import mongoose from 'mongoose';
 
 import userRoutes from './routes/users';
-
+console.log('MongoDB URI:', process.env.MONGODB_CONNECTION_STRING)
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
 
 
@@ -14,6 +14,6 @@ app.use(cors());
 
 app.use('/users', userRoutes)
 
-app.listen(7000, () => {
+app.listen(8000, () => {
     console.log('Server is listening on PORT 7000')
 });
