@@ -1,10 +1,30 @@
 import { Link } from "react-router-dom";
 
 const Header = () => {
-
+  const isLoggedIn = localStorage.getItem("profile");
   return (
     <div className="bg-blue-800 py-6">
-      
+      <div className="container flex justify-between mx-auto">
+        <span className="text-white font-bold text-3xl">
+          <Link to="/">MernHolidays.com</Link>
+        </span>
+        {isLoggedIn ? (
+          <nav className="flex gap-6">
+            <span className="text-white font-bold text-xl"><Link to="/my-bookings">My Bookings</Link></span>
+            <span className="text-white font-bold text-xl"><Link to="/my-hotels">My Hotels</Link></span>
+
+            <button className="bg-white text-blue-600 font-bold px-3 rounded">
+              <Link to="/">Sign Out</Link>
+            </button>
+          </nav>
+        ) : (
+          <div>
+            <button className="bg-white text-blue-600 font-bold px-3 rounded">
+              <Link to="/signin">Sign in</Link>
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
