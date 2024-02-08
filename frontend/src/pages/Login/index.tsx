@@ -31,7 +31,7 @@ function Login() {
     }
   };
   return (
-    <div className="border border-solid border-black h-300 w-300 p-4 flex flex-col py-5 px-5">
+    <div className="border border-solid border-black p-4 flex flex-col py-5 px-5">
       <h2 className="text-3xl font-bold px-0 py-2">Sign In</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="form-field">
