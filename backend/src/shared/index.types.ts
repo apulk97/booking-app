@@ -25,7 +25,7 @@ export type UserType = {
   };
 
   export interface Pagination {
-    totalPages: number;
+    total: number;
     page: number;
     pages: number;
 }

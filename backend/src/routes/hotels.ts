@@ -3,6 +3,6 @@ import { getAllHotels } from '../controller/hotels'
 
 const router = express.Router()
 
-router.get('/seacrh', getAllHotels)
+router.get('/search', getAllHotels)
 
 export default router
