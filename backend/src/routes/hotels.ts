@@ -1,12 +1,8 @@
-import express from "express";
-import { addHotel, editHotel, getHotel, getHotelById } from "../controller/hotels";
-import validateToken from "../middleware/auth";
+import express from 'express'
+import { getAllHotels } from '../controller/hotels'
 
-const routers = express.Router();
+const router = express.Router()
 
-routers.post("/add", validateToken, addHotel);
-routers.get("/get", validateToken, getHotel);
-routers.get("/:id", validateToken, getHotelById);
-routers.put("/:id", validateToken, editHotel)
+router.get('/seacrh', getAllHotels)
 
-export default routers;
+export default router

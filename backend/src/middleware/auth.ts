@@ -4,6 +4,7 @@ import 'dotenv/config'
 
 export interface CustomRequest extends Request {
     userId?: string;
+    files: any
 }
 
 const validateToken = async (req: CustomRequest, res: Response, next: NextFunction) => {
