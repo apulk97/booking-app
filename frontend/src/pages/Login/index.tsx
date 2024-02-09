@@ -24,39 +24,51 @@ function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await dispatch(signin({formData, navigate}));
+      await dispatch(signin({ formData, navigate }));
     } catch (error) {
       // Handle error (if needed)
       console.error("Signup failed", error);
     }
   };
   return (
-    <div className="main">
-      <h2>Sign In</h2>
+    <div className="border border-solid border-black p-4 flex flex-col py-5 px-5">
+      <h2 className="text-3xl font-bold px-0 py-2">Sign In</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="form-field">
-          <label>Email Address</label>
+          <label className="text-gray-700 text-sm font-bold flex-1">
+            Email Address
+          </label>
           <input
             type="email"
-            className="input"
+            className="border rounded w-full py-1 px-2 font-normal"
             value={formData.email}
             onChange={(e) => updateForm("email", e.target.value)}
           />
         </div>
         <div className="form-field">
-          <label>Password</label>
+          <label className="text-gray-700 text-sm font-bold flex-1">
+            Password
+          </label>
           <input
             type="password"
-            className="input"
+            className="border rounded w-full py-1 px-2 font-normal"
             value={formData.password}
             onChange={(e) => updateForm("password", e.target.value)}
           />
         </div>
-        <div className="footer">
-          <p className="text">
-            Not registered ? <Link to="/register">Create an account here</Link>
-          </p>
-          <input type="submit" value={"Sign in"} />
+        <div className="flex items-center justify-between">
+          <span className="text">
+            Not Registered?{" "}
+            <Link className="underline" to="/register">
+              Create an account here
+            </Link>
+          </span>
+          <button
+            type="submit"
+            className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl border rounded "
+          >
+            Login
+          </button>
         </div>
       </form>
     </div>

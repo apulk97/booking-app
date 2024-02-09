@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
     {Boolean(name) && <div>Hi, {name}</div>}
-    <Link to="/signin">Sign in</Link>
+    {/* <Link to="/signin">Sign in</Link> */}
     </>
   )
 }
