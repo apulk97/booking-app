@@ -6,11 +6,23 @@ export const getAllHotels = async (req: Request, res: Response) => {
   const pageSize = 5;
   const pageNumber = parseInt(req.query.page?.toString() || "1");
   const skip: number = (pageNumber - 1) * pageSize;
-  console.log(req.query, "queryy");
+
+  let sortOptions = {};
+    switch (req.query.sortOption) {
+      case "starRating":
+        sortOptions = { starRating: -1 };
+        break;
+      case "pricePerNightAsc":
+        sortOptions = { pricePerNight: 1 };
+        break;
+      case "pricePerNightDesc":
+        sortOptions = { pricePerNight: -1 };
+        break;
+    }
 
   const query = constructQuery(req.query);
   try {
-    const hotels = await Hotel.find(query).skip(skip).limit(pageSize);
+    const hotels = await Hotel.find(query).sort(sortOptions).skip(skip).limit(pageSize);
     const total = await Hotel.countDocuments();
     const response: HotelsPagination = {
       data: hotels,
