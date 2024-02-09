@@ -4,6 +4,7 @@ import 'dotenv/config'
 
 export interface CustomRequest extends Request {
     userId?: string;
+    files?: any
 }
 
 const validateToken = async (req: CustomRequest, res: Response, next: NextFunction) => {
@@ -16,8 +17,7 @@ const validateToken = async (req: CustomRequest, res: Response, next: NextFuncti
             return res.status(403).json({message: 'Invalid token'})
         }
     } catch (err) {
-        console.log(err, 'dsdsd');
-        
+        console.log(err, 'err in token'); 
     }
     next()
 }

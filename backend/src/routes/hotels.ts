@@ -1,9 +1,8 @@
 import express from 'express'
-import { addHotel } from '../controller/hotels'
-import validateToken from '../middleware/auth'
+import { getAllHotels } from '../controller/hotels'
 
-const routers = express.Router()
+const router = express.Router()
 
-routers.post('/add',validateToken, addHotel)
+router.get('/search', getAllHotels)
 
-export default routers
+export default router

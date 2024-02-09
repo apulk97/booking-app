@@ -23,3 +23,14 @@ export type UserType = {
     lastUpdated: Date;
     // bookings: BookingType[];
   };
+
+  export interface Pagination {
+    total: number;
+    page: number;
+    pages: number;
+}
+
+export interface HotelsPagination {
+  data: HotelType[],
+  pagination: Pagination
+}
