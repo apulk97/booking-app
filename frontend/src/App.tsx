@@ -9,6 +9,7 @@ import Register from './pages/Register'
 import Layout from './Layout'
 import MyHotels from './pages/MyHotels'
 import MyBookings from './pages/MyBookings'
+import Search from './pages/Search'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Route path='/register' element={<Layout><Register /></Layout>} />
       <Route path='/my-hotels' element={<Layout><MyHotels /></Layout>} />
       <Route path='/my-bookings' element={<Layout><MyBookings /></Layout>} />
+      <Route path='/search' element={<Layout><Search/></Layout>} />
     </Routes>
       </>
   )
