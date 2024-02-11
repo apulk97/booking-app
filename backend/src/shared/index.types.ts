@@ -5,6 +5,11 @@ export type UserType = {
     firstName: string;
     lastName: string;
   };
+
+  export type AuthDataType = {
+    result: UserType,
+    token: string
+  }
   
   export type HotelType = {
     _id?: string;
