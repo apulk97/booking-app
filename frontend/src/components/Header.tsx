@@ -13,13 +13,13 @@ const Header = () => {
             <span className="text-white font-bold text-xl"><Link to="/my-bookings">My Bookings</Link></span>
             <span className="text-white font-bold text-xl"><Link to="/my-hotels">My Hotels</Link></span>
 
-            <button className="bg-white text-blue-600 font-bold px-3 rounded">
+            <button className="bg-white text-blue-600 font-bold px-3">
               <Link to="/">Sign Out</Link>
             </button>
           </nav>
         ) : (
-          <div>
-            <button className="bg-white text-blue-600 font-bold px-3 rounded">
+          <div className="flex">
+            <button className="bg-white text-blue-600 font-bold px-3">
               <Link to="/signin">Sign in</Link>
             </button>
           </div>
