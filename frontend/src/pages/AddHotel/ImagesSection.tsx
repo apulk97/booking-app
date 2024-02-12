@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { HotelType } from "./index.types";
+import { HotelType } from "../../types/index.types";
 import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
 
 

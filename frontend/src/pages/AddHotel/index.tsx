@@ -1,19 +1,36 @@
-import React, { useState } from 'react'
-import { HotelType } from './index.types'
-import { useDispatch, useSelector } from 'react-redux'
-import { UNSAFE_useRouteId, useNavigate } from 'react-router-dom'
-import { RootState, AppDispatch } from '../../store'
-import { signup } from '../../slices/authSlice'
-import { SubmitHandler, useForm ,RegisterOptions, FormProvider} from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import { addHotel } from '../../api'
+import { RootState } from '../../store'
 import BasicDetails from './BasicDetails'
-import Type from './TypeSection'
 import FacilitiesSection from './FacilitiesSection'
 import GuestsSection from './GuestsSection'
 import ImagesSection from './ImagesSection'
-import { addhotel } from '../../api/hotel'
+import Type from './TypeSection'
+import { HotelType } from '../../types/index.types'
+
 function Register() {
+  const { authData } = useSelector((state: RootState) => state.auth);  
+
   const formMethods = useForm<HotelType>({mode:'onBlur'})
-  const onSubmit: SubmitHandler<HotelType> = (data) => addhotel(data)
+  console.log(authData)
+
+  const onSubmit: SubmitHandler<HotelType> = (data:Object) => {
+    const formData = new FormData()
+    Object.entries(data).forEach(([key, value]) => {
+      // Check if the current value is an array
+      if (Array.isArray(value)) {
+        // If it's an array, convert it to a comma-separated string
+        value = value.join(',');
+      }
+      // Append the key-value pair to the FormData object
+      formData.append(key, value);
+    });
+
+    addHotel(authData.token,formData)
+  
+  
+  }
 
 
 
