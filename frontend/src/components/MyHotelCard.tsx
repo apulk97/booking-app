@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { HotelType } from "../../../backend/src/shared/index.types";
 
 interface Props {
@@ -5,7 +6,8 @@ interface Props {
 }
 
 function MyHotelCard(props: Props) {
-    const {name, description, city, country, adultCount, childCount, pricePerNight, starRating, type} = props.hotelData
+    const {_id, name, description, city, country, adultCount, childCount, pricePerNight, starRating, type} = props.hotelData
+    const navigate = useNavigate()
   return (
     <div className="w-full border border-slate-300 rounded p-6 flex flex-col">
       <h2 className="text-2xl font-bold pb-4">{name}</h2>
@@ -30,7 +32,9 @@ function MyHotelCard(props: Props) {
         </div>
       </div>
       <div className="flex justify-end">
-        <button className="text-white text-xl bg-blue-600 p-2 font-bold">View Details</button>
+        <button className="text-white text-xl bg-blue-600 p-2 font-bold" onClick={()=>{
+          navigate(`/edit-hotel/${_id}`,{})
+        }}>View Details</button>
       </div>
     </div>
   );

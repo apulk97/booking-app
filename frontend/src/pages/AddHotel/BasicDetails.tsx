@@ -9,6 +9,7 @@ const BasicDetails = () => {
 
   return (
     <div className="flex flex-col gap-3">
+
       <h2 className="text-3xl font-bold mb-3 text-center">Add Hotel</h2>
 
       <div className="gap-3 flex flex-col">
@@ -39,7 +40,11 @@ const BasicDetails = () => {
       <label htmlFor="description">
         Pirce per Night
         <br />
-        <input className="border-2 rounded p-1 px-2 w-1/3" type='number' {...register('pricePerNight', { required: 'Description is required', maxLength: 20 })} />
+        <input
+          className="border-2 rounded p-1 px-2 w-1/3"
+          type="number"
+          {...register('pricePerNight', { required: 'Description is required', maxLength: 20 })}
+        />
         {errors.pricePerNight && <span className="text-red-500">{errors.pricePerNight.message}</span>}
       </label>
 
@@ -56,7 +61,9 @@ const BasicDetails = () => {
               Select as Rating
             </option>
             {[1, 2, 3, 4, 5].map((num) => (
-              <option value={num} key={num}>{num}</option>
+              <option value={num} key={num}>
+                {num}
+              </option>
             ))}
           </select>
         </label>
