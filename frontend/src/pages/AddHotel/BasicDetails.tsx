@@ -9,7 +9,6 @@ const BasicDetails = () => {
 
   return (
     <div className="flex flex-col gap-3">
-
       <h2 className="text-3xl font-bold mb-3 text-center">Add Hotel</h2>
 
       <div className="gap-3 flex flex-col">
@@ -32,7 +31,13 @@ const BasicDetails = () => {
         </div>
         <label htmlFor="description">
           Description
-          <input className="w-full border-2 rounded p-1 px-2" {...register('description', { required: 'Description is required', maxLength: 20 })} />
+          <input
+            className="w-full border-2 rounded p-1 px-2"
+            {...register('description', {
+              required: 'Description is required',
+              maxLength: { message: 'Decription cannot be more than 200 chars', value: 200 },
+            })}
+          />
           {errors.description && <span className="text-red-500">{errors.description.message}</span>}
         </label>
       </div>
