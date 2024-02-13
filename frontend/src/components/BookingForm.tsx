@@ -6,15 +6,7 @@ function BookingForm() {
       <form className="mt-5 flex flex-col">
         <div className="grid sm:grid-cols-2 gap-3">
           <div className="flex flex-col">
-            <label className="text-gray-700 text-sm font-bold flex-1">First Name</label>
-            <input
-              type="text"
-              disabled
-              className="mt-1 border rounded w-full py-1 px-3 text-gray-700 bg-gray-200 font-normal"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm font-bold flex-1">Last Name</label>
+            <label className="text-gray-700 text-sm font-bold flex-1">Name</label>
             <input
               type="text"
               disabled
