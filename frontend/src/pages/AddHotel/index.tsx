@@ -21,7 +21,8 @@ function AddEditHotel() {
     const formData = new FormData()
     Object.entries(data).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        value = value.join(',')
+        value.forEach((val)=>formData.append(key,val))
+        return
       }
       if(key=='imageFiles'){
         Array.from(data[key]).forEach((obj)=>formData.append(key,obj))
