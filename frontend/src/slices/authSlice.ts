@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserInterface } from "../pages/Register/index.types";
+import {AuthDataType} from '../../../backend/src/shared/index.types'
+
 import * as api from "../api/index";
 
 interface SigninInterface {
@@ -28,7 +30,7 @@ export const signin = createAsyncThunk("auth/signin", async (args: SigninInterfa
 });
 
 export const authSlice = createSlice({
-  initialState: { authData: {}, loading: false },
+  initialState : { authData: {result: {}, token: ''}, loading: false } as  { authData: AuthDataType; loading: boolean },
   name: "auth",
   reducers: {},
   extraReducers: (builder) => {
@@ -36,7 +38,7 @@ export const authSlice = createSlice({
       .addCase(signup.pending, (state) => {
         state.loading = true;
       })
-      .addCase(signup.fulfilled, (state, { payload }: PayloadAction<any>) => {
+      .addCase(signup.fulfilled, (state, { payload }: PayloadAction<AuthDataType>) => {
         localStorage.setItem('profile', JSON.stringify(payload.result))
         state.loading = false;
         state.authData = payload;

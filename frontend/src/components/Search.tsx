@@ -31,16 +31,16 @@ function Search() {
         <input value={searchForm.destination} onChange={(e) => updateForm('destination', e.target.value)} className="w-full focus:outline-none text-md" placeholder="Where are you going ?" />
       </div>
       <div className="flex flex-1 justify-between bg-white p-2">
-        <div className="flex w-1/2">
+        <div className="flex w-1/2 items-center">
           <label className="text-lg">Adult: </label>
-          <input value={searchForm.adultCount} onChange={(e) => updateForm('adultCount', e.target.value)} className="w-2/3 text-md focus: outline-none" type="number" />
+          <input value={searchForm.adultCount} onChange={(e) => updateForm('adultCount', e.target.value)} className="w-2/3 text-lg pl-1 font-bold focus: outline-none" type="number" />
         </div>
-        <div className="flex w-1/2">
+        <div className="flex w-1/2 items-center">
           <label className="text-lg">Child: </label>
-          <input value={searchForm.childCount} onChange={(e) => updateForm('childCount', e.target.value)} className="w-2/3 text-md focus: outline-none" type="number" />
+          <input value={searchForm.childCount} onChange={(e) => updateForm('childCount', e.target.value)} className="w-2/3 text-lg pl-1 font-bold focus: outline-none" type="number" />
         </div>
       </div>
-      <div>
+      <div className="flex">
         <DatePicker
         selected={new Date(searchForm.checkinDate)}
           onChange={(date) => updateForm('checkinDate', date?.toISOString() ?? '')}
@@ -50,7 +50,7 @@ function Search() {
           wrapperClassName="min-w-full"
         />
       </div>
-      <div>
+      <div className="flex">
         <DatePicker
           selected={new Date(searchForm.checkoutDate)}
           onChange={(date) => updateForm('checkoutDate', date?.toISOString() ?? '')}
