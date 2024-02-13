@@ -17,13 +17,17 @@ function AddEditHotel() {
   const navigate = useNavigate()
   const formMethods = useForm<HotelType>({ mode: 'all' })
 
-  const onSubmit: SubmitHandler<HotelType> = (data: Object) => {
+  const onSubmit: SubmitHandler<HotelType> = (data: HotelType) => {
     const formData = new FormData()
     Object.entries(data).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         value = value.join(',')
       }
-      formData.append(key, value)
+      if(key=='imageFiles'){
+        Array.from(data[key]).forEach((obj)=>formData.append(key,obj))
+        return
+      }
+      formData.append(key, value.toString())
     })
     addHotel(authData.token, formData).then((response) => navigate('/my-hotels'))
   }
