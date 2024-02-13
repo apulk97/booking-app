@@ -1,10 +1,25 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import * as api from "../../api/index";
+import { RootState } from "../../store";
 import StarRatingFilter from "./starRatingFilter";
 import HotelTypesFilter from "./hotelTypesFilter";
 import FacilitiesFilter from "./facilitiesFilter";
 import PriceFilter from "./priceFilter";
 
 function Search() {
+  const { authData } = useSelector((state: RootState) => state.auth);
+  const [searchData, setSearchData] = useState([]);
+
+  useEffect(() => {
+    const fetchSearch = async () => {
+      const { data } = await api.search(authData.token);
+      setSearchData(data);
+    };
+    fetchSearch();
+  }, []);
+
   const dummyData = [
     {
       imgUrl: "https://dummyimage.com/250/ffffff/000000",
