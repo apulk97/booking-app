@@ -7,33 +7,30 @@ import StarRatingFilter from "./starRatingFilter";
 import HotelTypesFilter from "./hotelTypesFilter";
 import FacilitiesFilter from "./facilitiesFilter";
 import PriceFilter from "./priceFilter";
+import Pagination from "./pagination";
+import SearchResultsCard from "./searchResultsCard";
 
 function Search() {
   const { authData } = useSelector((state: RootState) => state.auth);
-  const [searchData, setSearchData] = useState([]);
+  const [searchData, setSearchData] = useState<any>(null);
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchSearch = async () => {
-      const { data } = await api.search(authData.token);
-      setSearchData(data);
+      setLoading(true);
+      try {
+        const { data } = await api.search(authData.token);
+        setSearchData(data);
+      } catch (error) {
+        console.error("Error fetching search data:", error);
+        // Handle error (e.g., show error message)
+      } finally {
+        setLoading(false);
+      }
     };
     fetchSearch();
   }, []);
-
-  const dummyData = [
-    {
-      imgUrl: "https://dummyimage.com/250/ffffff/000000",
-    },
-    {
-      imgUrl: "https://dummyimage.com/250/000000/ffffff",
-    },
-    {
-      imgUrl: "https://dummyimage.com/250/ffffff/000000",
-    },
-    {
-      imgUrl: "https://dummyimage.com/250/000000/ffffff",
-    },
-  ];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
@@ -49,14 +46,23 @@ function Search() {
         </div>
       </div>
       <div>
-        {dummyData.map((item, index) => (
-          <div
-            key={index}
-            className="rounded-lg border border-slate-300 flex-wrap-reverse h-20 "
-          >
-            <div>{item.imgUrl}</div>
-          </div>
-        ))}
+        <div>
+          {loading && <div>Loading...</div>}
+          {searchData?.data?.length === 0 ? (
+            <div>No record found</div>
+          ) : (
+            searchData?.data?.map((item: any, index: number) => (
+              <SearchResultsCard key={index} hotel={item} />
+            ))
+          )}
+        </div>
+        <div>
+          <Pagination
+            page={searchData?.pagination.page || 1}
+            pages={searchData?.pagination.pages || 1}
+            onPageChange={(page) => setPage(page)}
+          />
+        </div>
       </div>
     </div>
   );
