@@ -4,6 +4,24 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
+import { CustomRequest } from "../middleware/auth";
+
+export const getUserDetails = async (req: CustomRequest, res: Response) => {
+  const { userId } = req
+  console.log(userId);
+  
+  try {
+    const result = await User.findById(userId).select("-password")
+    if (!result) {
+      return res.status(404).json({message: 'User does not exists'})
+  }
+    res.status(200).json(result)
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+}
+
 export const signin = async (req: Request, res: Response) => {
   const { password, email } = req.body;
   try {

@@ -40,6 +40,7 @@ export const authSlice = createSlice({
       })
       .addCase(signup.fulfilled, (state, { payload }: PayloadAction<AuthDataType>) => {
         localStorage.setItem('profile', JSON.stringify(payload.result))
+        localStorage.setItem('token', JSON.stringify(payload.token))
         state.loading = false;
         state.authData = payload;
       })
@@ -51,6 +52,7 @@ export const authSlice = createSlice({
       })
       .addCase(signin.fulfilled, (state, { payload }: PayloadAction<any>) => {
         localStorage.setItem('profile', JSON.stringify(payload.result))
+        localStorage.setItem('token', JSON.stringify(payload.token))
         state.loading = false;
         state.authData = payload;
       })

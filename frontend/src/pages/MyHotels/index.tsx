@@ -1,20 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { HotelType } from '../../../../backend/src/shared/index.types';
 import * as api from '../../api/index';
 import MyHotelCard from '../../components/MyHotelCard';
-import { RootState } from '../../store';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 
 function MyHotels() {
-  const { authData } = useSelector((state: RootState) => state.auth);  
   const [hotelData, setHotelData] = useState<HotelType[]>([])
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHotelData = async () => {
-      const {data} = await api.myHotels(authData.token)
+      const {data} = await api.myHotels()
       setHotelData(data)
     }
     fetchHotelData()

@@ -1,5 +1,10 @@
+import { UserData } from "../pages/Confirmation";
 
-function BookingForm() {
+interface Props {
+  userData: UserData
+}
+
+function BookingForm({userData}: Props) {
   return (
     <div className="border border-slate-300 rounded p-4">
       <h2 className="font-bold text-3xl">Confirm Your Details</h2>
@@ -9,6 +14,7 @@ function BookingForm() {
             <label className="text-gray-700 text-sm font-bold flex-1">Name</label>
             <input
               type="text"
+              value={userData.name}
               disabled
               className="mt-1 border rounded w-full py-1 px-3 text-gray-700 bg-gray-200 font-normal"
             />
@@ -17,6 +23,7 @@ function BookingForm() {
             <label className="text-gray-700 text-sm font-bold flex-1">Email</label>
             <input
               type="email"
+              value={userData.email}
               disabled
               className="mt-1 border rounded w-full py-1 px-3 text-gray-700 bg-gray-200 font-normal"
             />
