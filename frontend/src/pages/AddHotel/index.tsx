@@ -1,18 +1,15 @@
+import { useLayoutEffect } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import { addHotel, getHotel } from '../../api'
-import { RootState } from '../../store'
+import { HotelType } from '../../types/index.types'
 import BasicDetails from './BasicDetails'
 import FacilitiesSection from './FacilitiesSection'
 import GuestsSection from './GuestsSection'
 import ImagesSection from './ImagesSection'
 import Type from './TypeSection'
-import { HotelType } from '../../types/index.types'
-import { useNavigate, useNavigation, useParams } from 'react-router-dom'
-import { useLayoutEffect } from 'react'
 
 function AddEditHotel() {
-  const { authData } = useSelector((state: RootState) => state.auth)
   const {hotelId} = useParams()
   const navigate = useNavigate()
   const formMethods = useForm<HotelType>({ mode: 'all' })
@@ -30,12 +27,12 @@ function AddEditHotel() {
       }
       formData.append(key, value.toString())
     })
-    addHotel(authData.token, formData).then((response) => navigate('/my-hotels'))
+    addHotel(formData).then((response) => navigate('/my-hotels'))
   }
 
   useLayoutEffect(()=>{
     if(hotelId){
-      getHotel(authData.token, hotelId).then((response)=>{
+      getHotel(hotelId).then((response)=>{
         if(response.status == 201){
 
         }
