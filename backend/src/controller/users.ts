@@ -8,7 +8,6 @@ import { CustomRequest } from "../middleware/auth";
 
 export const getUserDetails = async (req: CustomRequest, res: Response) => {
   const { userId } = req
-  console.log(userId);
   
   try {
     const result = await User.findById(userId).select("-password")

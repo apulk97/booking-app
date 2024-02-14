@@ -12,3 +12,8 @@ export type HotelType = {
   adultCount: number;
   childCount: number;
 }
+
+export interface UserData {
+  name: string;
+  email: string;
+}

@@ -13,7 +13,7 @@ const Header = () => {
             <span className="text-white font-bold text-xl"><Link to="/my-bookings">My Bookings</Link></span>
             <span className="text-white font-bold text-xl"><Link to="/my-hotels">My Hotels</Link></span>
 
-            <button className="bg-white text-blue-600 font-bold px-3">
+            <button className="bg-white text-blue-600 font-bold px-3" onClick={() => localStorage.clear()}>
               <Link to="/">Sign Out</Link>
             </button>
           </nav>

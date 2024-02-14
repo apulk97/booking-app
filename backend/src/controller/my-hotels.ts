@@ -32,7 +32,7 @@ export const getHotel = async (req: CustomRequest, res: Response) => {
   }
 };
 
-export const getHotelById = async (req: CustomRequest, res: Response) => {
+export const getMyHotelById = async (req: CustomRequest, res: Response) => {
   try {
     const userId = req.userId;
     const hotelId = req.params.id.toString();

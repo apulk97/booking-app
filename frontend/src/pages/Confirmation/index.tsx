@@ -3,16 +3,34 @@ import * as api from "../../api/index";
 import BookingForm from "../../components/BookingForm";
 import BookingSummary from "../../components/BookingSummary";
 import { SearchFormInterface } from "../../slices/searchSlice";
+import { useParams } from "react-router-dom";
+import { UserData } from "../../types/index.types";
+import { HotelType } from "../../../../backend/src/shared/index.types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
-export interface UserData {
-  name: string;
-  email: string;
-}
+const initialHotel: HotelType = {
+  name: "",
+  city: "",
+  country: "",
+  description: "",
+  type: "",
+  pricePerNight: 1,
+  starRating: 1,
+  facilities: [],
+  imageUrls: [],
+  adultCount: 1,
+  childCount: 1,
+  userId: "",
+  lastUpdated: new Date(),
+};
 
 function Confirmation() {
   const [userData, setUserData] = useState<UserData>({ name: "", email: "" });
+  const [hotelData, setHotelData] = useState<HotelType>(initialHotel);
   const [numberOfNights, setNumberOfNights] = useState(1);
-  const searchData: SearchFormInterface = JSON.parse(sessionStorage.getItem("search") ?? "");
+  const searchData: SearchFormInterface = useSelector((state: RootState) => state.search.search)
+  const { id = "" } = useParams();  
 
   useEffect(() => {
     if (searchData.checkinDate && searchData.checkoutDate) {
@@ -24,16 +42,22 @@ function Confirmation() {
   }, [searchData.checkinDate, searchData.checkoutDate]);
 
   useLayoutEffect(() => {
-    const getData = async () => {
-      const { data } = await api.getUserInfo();
-      setUserData(data);
-    };
-    getData();
+    getUserData();
+    getHotelData();
   }, []);
 
+  const getUserData = async () => {
+    const { data } = await api.getUserInfo();
+    setUserData(data);
+  };
+
+  const getHotelData = async () => {
+    const { data } = await api.getHotelById(id);
+    setHotelData(data);
+  };
   return (
     <div className="grid md:grid-cols-[1fr_2fr] gap-4">
-      <BookingSummary searchData={searchData} numberOfNights={numberOfNights} />
+      <BookingSummary searchData={searchData} numberOfNights={numberOfNights} hotelData={hotelData} />
       <BookingForm userData={userData} />
     </div>
   );

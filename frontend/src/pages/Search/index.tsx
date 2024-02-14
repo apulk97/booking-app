@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 import * as api from "../../api/index";
-import { RootState } from "../../store";
-import StarRatingFilter from "./starRatingFilter";
-import HotelTypesFilter from "./hotelTypesFilter";
 import FacilitiesFilter from "./facilitiesFilter";
-import PriceFilter from "./priceFilter";
+import HotelTypesFilter from "./hotelTypesFilter";
 import Pagination from "./pagination";
+import PriceFilter from "./priceFilter";
 import SearchResultsCard from "./searchResultsCard";
+import StarRatingFilter from "./starRatingFilter";
 
 function Search() {
-  const { authData } = useSelector((state: RootState) => state.auth);
   const [searchData, setSearchData] = useState<any>(null);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState(false);
@@ -20,7 +17,7 @@ function Search() {
     const fetchSearch = async () => {
       setLoading(true);
       try {
-        const { data } = await api.search(authData.token);
+        const { data } = await api.searchHotels();
         setSearchData(data);
       } catch (error) {
         console.error("Error fetching search data:", error);

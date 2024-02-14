@@ -1,4 +1,4 @@
-import { UserData } from "../pages/Confirmation";
+import { UserData } from "../types/index.types";
 
 interface Props {
   userData: UserData
