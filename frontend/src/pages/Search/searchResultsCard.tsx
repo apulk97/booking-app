@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { AiFillStar } from "react-icons/ai";
 
 const SearchResultsCard = ({ hotel }) => {
   return (
@@ -14,7 +14,9 @@ const SearchResultsCard = ({ hotel }) => {
         <div>
           <div className="flex items-center">
             <span className="flex">
-           {/* star */}
+              {Array.from({ length: hotel.starRating }).map(() => (
+                <AiFillStar className="fill-yellow-400" />
+              ))}
             </span>
             <span className="ml-1 text-sm">{hotel.type}</span>
           </div>
