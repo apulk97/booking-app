@@ -8,6 +8,7 @@ const SearchResultsCard = ({ hotel }) => {
         <img
           src={hotel.imageUrls[0]}
           className="w-full h-full object-cover object-center"
+          alt="no image"
         />
       </div>
       <div className="grid grid-rows-[1fr_2fr_1fr]">
