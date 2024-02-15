@@ -13,6 +13,7 @@ function AddEditHotel() {
   const {hotelId} = useParams()
   const navigate = useNavigate()
   const formMethods = useForm<HotelType>({ mode: 'all' })
+  const {reset} = formMethods
 
   const onSubmit: SubmitHandler<HotelType> = (data: HotelType) => {
     const formData = new FormData()
@@ -33,8 +34,8 @@ function AddEditHotel() {
   useLayoutEffect(()=>{
     if(hotelId){
       getHotel(hotelId).then((response)=>{
-        if(response.status == 201){
-
+        if(response.status == 200){
+          reset({...response.data})
         }
       })
     }
