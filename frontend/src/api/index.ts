@@ -12,8 +12,9 @@ api.interceptors.request.use((req) => {
 export const signup = (data: UserInterface) => api.post("/users/signup", data);
 export const signin = (data: UserInterface) => api.post("/users/signin", data);
 export const getUserInfo = () => api.get("/users/me")
+
 export const myHotels = () => api.get("my-hotels/get");
 export const addHotel = (data: FormData) => api.post("my-hotels/add",data);
 export const getHotel = (id:string) => api.get(`my-hotels/${id}`);
-export const search = (token: string) => api.get("hotels/search", { headers: { Authorization: `bearer ${token}` } });
-export const detailHotel = (id:string) => api.get(`/hotels/${id}`);
+export const searchHotels = () => api.get("hotels/search");
+export const getHotelById = (hotelId: string) => api.get(`hotels/${hotelId}`)
