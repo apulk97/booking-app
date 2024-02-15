@@ -16,3 +16,4 @@ export const myHotels = () => api.get("my-hotels/get");
 export const addHotel = (data: FormData) => api.post("my-hotels/add",data);
 export const getHotel = (id:string) => api.get(`my-hotels/${id}`);
 export const search = (token: string) => api.get("hotels/search", { headers: { Authorization: `bearer ${token}` } });
+export const detailHotel = (id:string) => api.get(`/hotels/${id}`);
