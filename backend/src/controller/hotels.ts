@@ -88,7 +88,7 @@ export const createPaymentIntent = async(req: CustomRequest, res: Response) => {
     totalAmount,
   };
   
-  res.send(200).json(response)
+  res.status(200).json(response)
 }
 
 export const addBooking = async(req: CustomRequest, res: Response) => {
@@ -120,7 +120,7 @@ export const addBooking = async(req: CustomRequest, res: Response) => {
   const booking: BookingType = {
     ...req.body, userId
   }
-  const hotel = await Hotel.findById({_id: hotelId}, {
+  const hotel = await Hotel.findOneAndUpdate({_id: hotelId}, {
     $push: {bookings: booking}
   })
 
