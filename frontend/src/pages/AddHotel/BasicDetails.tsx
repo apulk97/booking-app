@@ -12,24 +12,24 @@ const BasicDetails = () => {
       <h2 className="text-3xl font-bold mb-3 text-center">Add Hotel</h2>
 
       <div className="gap-3 flex flex-col">
-        <label htmlFor="name">
+        <label>
           Name
           <input className="w-full border-2 rounded p-1 px-2" {...register('name', { required: 'Name is required', maxLength: 20 })} />
           {errors.name && <span className="text-red-500">{errors.name.message}</span>}
         </label>
         <div className="flex gap-3 ">
-          <label htmlFor="name">
+          <label>
             City
             <input className="w-full border-2 rounded p-1 px-2" {...register('city', { required: 'City name is required', maxLength: 20 })} />
             {errors.city && <span className="text-red-500">{errors.city.message}</span>}
           </label>
-          <label htmlFor="name">
+          <label>
             Country
             <input className="w-full border-2 rounded p-1 px-2" {...register('country', { required: 'Country is required', maxLength: 10 })} />
             {errors.country && <span className="text-red-500">{errors.country.message}</span>}
           </label>
         </div>
-        <label htmlFor="description">
+        <label>
           Description
           <input
             className="w-full border-2 rounded p-1 px-2"
@@ -42,7 +42,7 @@ const BasicDetails = () => {
         </label>
       </div>
 
-      <label htmlFor="description">
+      <label>
         Pirce per Night
         <br />
         <input
@@ -54,7 +54,7 @@ const BasicDetails = () => {
       </label>
 
       <div>
-        <label htmlFor="description">
+        <label>
           Star Rating
           <select
             {...register('starRating', {
