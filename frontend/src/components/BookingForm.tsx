@@ -34,12 +34,11 @@ console.log({result});
         email: userData.email,
         adultCount: searchData.adultCount,
         childCount: searchData.childCount,
-        checkIn: new Date(searchData.checkinDate).toISOString(),
-        checkOut: new Date(searchData.checkoutDate).toISOString(),
-        hotelId: hotelId,
+        checkIn: new Date(searchData.checkinDate),
+        checkOut: new Date(searchData.checkoutDate),
         totalCost: paymentIntentData.totalAmount,
       }
-      const { status } = await api.bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id }, hotelId);
+      const { status } = await api.bookRoom({ data: formData, paymentIntentId: result.paymentIntent.id }, hotelId);
       if (status == 200) {
         //show toast
       }

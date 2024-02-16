@@ -23,9 +23,12 @@ export type BookingFormData = {
   email: string;
   adultCount: number;
   childCount: number;
-  checkIn: string;
-  checkOut: string;
-  hotelId: string;
-  paymentIntentId: string;
+  checkIn: Date;
+  checkOut: Date;
   totalCost: number;
 };
+
+export type BookingFromReq = {
+  data: BookingFormData;
+  paymentIntentId: string;
+}

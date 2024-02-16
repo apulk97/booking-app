@@ -7,6 +7,7 @@ import { v2 as cloudinary } from 'cloudinary'
 import userRoutes from './routes/users';
 import myHotelRoutes from './routes/my-hotels'
 import hotelRoutes from './routes/hotels'
+import bookingRoutes from './routes/my-bookings'
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,6 +24,7 @@ app.use(cors());
 app.use('/users', userRoutes)
 app.use('/my-hotels', myHotelRoutes)
 app.use('/hotels', hotelRoutes)
+app.use('/my-bookings', bookingRoutes)
 
 
 app.listen(8000, () => {

@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import Stripe from 'stripe'
+import Stripe from "stripe";
 import Hotel from "../models/hotels";
-import { CustomRequest } from '../middleware/auth'
+import { CustomRequest } from "../middleware/auth";
 import { BookingType, HotelType, HotelsPagination, PaymentIntentResponse } from "../shared/index.types";
-import 'dotenv/config'
+import "dotenv/config";
 
-const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
+const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
 export const getAllHotels = async (req: Request, res: Response) => {
   const pageSize = 5;
@@ -13,17 +13,17 @@ export const getAllHotels = async (req: Request, res: Response) => {
   const skip: number = (pageNumber - 1) * pageSize;
 
   let sortOptions = {};
-    switch (req.query.sortOption) {
-      case "starRating":
-        sortOptions = { starRating: -1 };
-        break;
-      case "pricePerNightAsc":
-        sortOptions = { pricePerNight: 1 };
-        break;
-      case "pricePerNightDesc":
-        sortOptions = { pricePerNight: -1 };
-        break;
-    }
+  switch (req.query.sortOption) {
+    case "starRating":
+      sortOptions = { starRating: -1 };
+      break;
+    case "pricePerNightAsc":
+      sortOptions = { pricePerNight: 1 };
+      break;
+    case "pricePerNightDesc":
+      sortOptions = { pricePerNight: -1 };
+      break;
+  }
 
   const query = constructQuery(req.query);
   try {
@@ -44,41 +44,40 @@ export const getAllHotels = async (req: Request, res: Response) => {
   }
 };
 
-export const getHotelById = async(req: Request, res: Response) => {
-  const hotelId = req.params.id?.toString() ?? ''
+export const getHotelById = async (req: Request, res: Response) => {
+  const hotelId = req.params.id?.toString() ?? "";
   try {
-    const hotel = await Hotel.findById(hotelId)
+    const hotel = await Hotel.findById(hotelId);
     if (!hotel) {
-      return res.status(404).json({message: "Hotel not found"})
+      return res.status(404).json({ message: "Hotel not found" });
     }
-    return res.status(200).json(hotel)
-
+    return res.status(200).json(hotel);
   } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Error fetching hotel" });
-    }
-}
-
-export const createPaymentIntent = async(req: CustomRequest, res: Response) => {
-  const hotelId = req.params.hotelId
-  const userId = req.userId as string
-  const { numberOfNights } = req.body
-  const hotel = await Hotel.findById(hotelId)
-  if (!hotel) {
-    return res.status(404).json({message: 'Hotel not found'})
+    console.log(error);
+    res.status(500).json({ message: "Error fetching hotel" });
   }
-  const totalAmount = numberOfNights * hotel.pricePerNight
+};
+
+export const createPaymentIntent = async (req: CustomRequest, res: Response) => {
+  const hotelId = req.params.hotelId;
+  const userId = req.userId as string;
+  const { numberOfNights } = req.body;
+  const hotel = await Hotel.findById(hotelId);
+  if (!hotel) {
+    return res.status(404).json({ message: "Hotel not found" });
+  }
+  const totalAmount = numberOfNights * hotel.pricePerNight;
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: totalAmount*100,
-    currency: 'inr',
+    amount: totalAmount * 100,
+    currency: "inr",
     metadata: {
       hotelId,
-      userId
-    }
-  })
+      userId,
+    },
+  });
 
-  if(!paymentIntent.client_secret) {
+  if (!paymentIntent.client_secret) {
     return res.status(500).json({ message: "Error creating payment intent" });
   }
 
@@ -87,27 +86,22 @@ export const createPaymentIntent = async(req: CustomRequest, res: Response) => {
     clientSecret: paymentIntent.client_secret.toString(),
     totalAmount,
   };
-  
-  res.status(200).json(response)
-}
 
-export const addBooking = async(req: CustomRequest, res: Response) => {
-  const userId = req.userId
-  const hotelId = req.params.hotelId
-  const {paymentIntentId} = req.body
+  res.status(200).json(response);
+};
 
-  const paymentIntent = await stripe.paymentIntents.retrieve(
-    paymentIntentId as string
-  );
+export const addBooking = async (req: CustomRequest, res: Response) => {
+  const userId = req.userId;
+  const hotelId = req.params.hotelId;
+  const { paymentIntentId } = req.body;
+
+  const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId as string);
 
   if (!paymentIntent) {
     return res.status(400).json({ message: "payment intent not found" });
   }
 
-  if (
-    paymentIntent.metadata.hotelId !== hotelId ||
-    paymentIntent.metadata.userId !== userId
-  ) {
+  if (paymentIntent.metadata.hotelId !== hotelId || paymentIntent.metadata.userId !== userId) {
     return res.status(400).json({ message: "payment intent mismatch" });
   }
 
@@ -118,19 +112,29 @@ export const addBooking = async(req: CustomRequest, res: Response) => {
   }
 
   const booking: BookingType = {
-    ...req.body, userId
-  }
-  const hotel = await Hotel.findOneAndUpdate({_id: hotelId}, {
-    $push: {bookings: booking}
-  })
+    ...req.body.data,
+    userId,
+  };
 
-  if (!hotel) {
-    return res.status(400).json({ message: "hotel not found" });
-  }
+  try {
+    const hotel = await Hotel.findOneAndUpdate(
+      { _id: hotelId },
+      {
+        $push: { bookings: booking },
+      }
+    );
+    
 
-  await hotel.save();
-  res.status(200).send();
-}
+    if (!hotel) {
+      return res.status(400).json({ message: "hotel not found" });
+    }
+
+    await hotel.save();
+    res.status(200).send();
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const constructQuery = (queryParams: any) => {
   let updatedQuery: any = {};
