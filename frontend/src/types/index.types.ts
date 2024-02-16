@@ -17,3 +17,18 @@ export interface UserData {
   name: string;
   email: string;
 }
+
+export type BookingFormData = {
+  name: string;
+  email: string;
+  adultCount: number;
+  childCount: number;
+  checkIn: Date;
+  checkOut: Date;
+  totalCost: number;
+};
+
+export type BookingFromReq = {
+  data: BookingFormData;
+  paymentIntentId: string;
+}
