@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
-// import { useSearchContext } from "../../contexts/SearchContext";
-// import { useAppContext } from "../../contexts/AppContext";
-import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   hotelId: string;
@@ -17,10 +14,7 @@ type GuestInfoFormData = {
 };
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
-  // const search = useSearchContext();
-  // const { isLoggedIn } = useAppContext();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const isLoggedIn = localStorage.getItem("profile");
 
   const {
     watch,
@@ -30,10 +24,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     formState: { errors },
   } = useForm<GuestInfoFormData>({
     defaultValues: {
-      checkIn: search.checkIn,
-      checkOut: search.checkOut,
-      adultCount: search.adultCount,
-      childCount: search.childCount,
+      checkIn: "",
+      checkOut: "",
+      adultCount: "",
+      childCount: "",
     },
   });
 
@@ -44,35 +38,12 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
-  const onSignInClick = (data: GuestInfoFormData) => {
-    search.saveSearchValues(
-      "",
-      data.checkIn,
-      data.checkOut,
-      data.adultCount,
-      data.childCount
-    );
-    navigate("/sign-in", { state: { from: location } });
-  };
-
-  const onSubmit = (data: GuestInfoFormData) => {
-    search.saveSearchValues(
-      "",
-      data.checkIn,
-      data.checkOut,
-      data.adultCount,
-      data.childCount
-    );
-    navigate(`/hotel/${hotelId}/booking`);
-  };
 
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
       <h3 className="text-md font-bold">£{pricePerNight}</h3>
       <form
-        onSubmit={
-          isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)
-        }
+        onSubmit={isLoggedIn ? handleSubmit(() => {}) : handleSubmit(() => {})}
       >
         <div className="grid grid-cols-1 gap-4 items-center">
           <div>
