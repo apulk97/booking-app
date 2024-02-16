@@ -17,7 +17,12 @@ function Search() {
     const fetchSearch = async () => {
       setLoading(true);
       try {
-        const { data } = await api.searchHotels();
+         const SearchParams= {
+          page: page
+          // Define other parameters here
+        }
+        const { data } = await api.searchHotels(SearchParams);
+
         setSearchData(data);
       } catch (error) {
         console.error("Error fetching search data:", error);
@@ -27,7 +32,7 @@ function Search() {
       }
     };
     fetchSearch();
-  }, []);
+  }, [page]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">

@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-import { useSelector } from "react-redux";
 import * as api from "../../api/index";
 import GuestInfoForm from "./guestInfoForm";
 
-
 export default function HotelDetail() {
-  const { hotelId } = useParams<{ hotelId: string }>(); // Ensure correct typing for hotelId
-  const { authData } = useSelector((state: RootState) => state.auth);
+  const { hotelId } = useParams();
   const [hotel, setHotel] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchHotel = async () => {
       setLoading(true);
       try {
-        const { data } = await api.detailHotel(hotelId);
+        const { data } = await api.getHotelById(hotelId);
         setHotel(data);
       } catch (error) {
         console.error("Error fetching search data:", error);
