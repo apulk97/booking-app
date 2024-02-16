@@ -5,6 +5,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { SearchFormInterface } from "../slices/searchSlice";
 import * as api from '../api/index'
+import { ToastContainer, toast } from "react-toastify";
 interface Props {
   userData: UserData;
   paymentIntentData: PaymentIntentResponse;
@@ -26,7 +27,6 @@ function BookingForm({ userData, paymentIntentData, searchData, hotelId }: Props
         card: elements.getElement(CardElement) as StripeCardElement,
       },
     });
-console.log({result});
 
     if (result.paymentIntent?.status === "succeeded") {
       const formData = {
@@ -40,13 +40,14 @@ console.log({result});
       }
       const { status } = await api.bookRoom({ data: formData, paymentIntentId: result.paymentIntent.id }, hotelId);
       if (status == 200) {
-        //show toast
+        toast.success('Booking confirmed')
       }
       
     }
   };
   return (
     <div className="border border-slate-300 rounded p-4">
+      <ToastContainer />
       <h2 className="font-bold text-3xl">Confirm Your Details</h2>
       <form className="mt-5 flex flex-col" onSubmit={(e) => handleSubmit(e)}>
         <div className="grid sm:grid-cols-2 gap-3">

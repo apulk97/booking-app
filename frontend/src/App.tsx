@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout'
 import Confirmation from './pages/Confirmation'
 import Home from './pages/Home'
