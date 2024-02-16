@@ -3,6 +3,7 @@ import { UserInterface } from "../pages/Register/index.types";
 import {AuthDataType} from '../../../backend/src/shared/index.types'
 
 import * as api from "../api/index";
+import { toast } from "react-toastify";
 
 interface SigninInterface {
   formData: UserInterface,
@@ -32,7 +33,13 @@ export const signin = createAsyncThunk("auth/signin", async (args: SigninInterfa
 export const authSlice = createSlice({
   initialState : { authData: {result: {}, token: ''}, loading: false } as  { authData: AuthDataType; loading: boolean },
   name: "auth",
-  reducers: {},
+  reducers: {
+    signout: (state) => {
+      state.authData = {result: {}, token: ''} as AuthDataType
+      localStorage.clear()
+      toast.success('Signed out sucessfully')
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signup.pending, (state) => {
@@ -62,4 +69,5 @@ export const authSlice = createSlice({
   },
 });
 
+export const { signout } = authSlice.actions
 export default authSlice.reducer;
