@@ -23,7 +23,10 @@ function Search() {
       try {
         const SearchParams = {
           page: page,
-          // Define other parameters here
+          stars: selectedStars,
+          types: selectedHotelTypes,
+          facilities: selectedFacilities,
+          maxPrice: selectedPrice?.toString(),
         };
         const { data } = await api.searchHotels(SearchParams);
 
@@ -36,7 +39,13 @@ function Search() {
       }
     };
     fetchSearch();
-  }, [page]);
+  }, [
+    page,
+    selectedStars,
+    selectedHotelTypes,
+    selectedFacilities,
+    selectedPrice,
+  ]);
 
   const handleStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const starRating = event.target.value;
@@ -47,7 +56,7 @@ function Search() {
         : prevStars.filter((star) => star !== starRating)
     );
   };
-
+  
   const handleHotelTypeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
