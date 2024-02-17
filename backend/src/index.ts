@@ -1,6 +1,6 @@
 import cors from "cors";
 import 'dotenv/config';
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from 'mongoose';
 import { v2 as cloudinary } from 'cloudinary'
 
@@ -29,6 +29,9 @@ app.use('/api/my-hotels', myHotelRoutes)
 app.use('/api/hotels', hotelRoutes)
 app.use('/api/my-bookings', bookingRoutes)
 
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+  });
 
 app.listen(8000, () => {
     console.log('Server is listening on PORT 8000')
