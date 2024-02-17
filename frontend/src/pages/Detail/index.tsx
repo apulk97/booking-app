@@ -12,7 +12,7 @@ export default function HotelDetail() {
     const fetchHotel = async () => {
       setLoading(true);
       try {
-        const { data } = await api.getHotelById(hotelId);
+        const { data } = await api.getHotelById(hotelId ?? '');
         setHotel(data);
       } catch (error) {
         console.error("Error fetching search data:", error);
@@ -81,7 +81,6 @@ export default function HotelDetail() {
             <div className="h-fit">
               <GuestInfoForm
             pricePerNight={hotel.pricePerNight}
-            hotelId={hotel._id}
           />
             </div>
           </div>
