@@ -1,58 +1,58 @@
-import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+
+import {
+  SearchFormInterface,
+  initialSearch,
+  updateSearchForm,
+} from "../../slices/searchSlice";
+import { AppDispatch } from "../../store";
 
 type Props = {
   pricePerNight: number;
+  hotelId: string;
 };
 
-type GuestInfoFormData = {
-  checkIn: Date;
-  checkOut: Date;
-  adultCount: number;
-  childCount: number;
-};
-
-const GuestInfoForm = ({ pricePerNight }: Props) => {
+const GuestInfoForm = ({ pricePerNight, hotelId }: Props) => {
   const isLoggedIn = localStorage.getItem("profile");
-
-  const {
-    watch,
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<GuestInfoFormData>({
-    defaultValues: {
-      checkIn: new Date(),
-      checkOut: new Date(),
-      adultCount: 1,
-      childCount: 1,
-    },
-  });
-
-  const checkIn = watch("checkIn");
-  const checkOut = watch("checkOut");
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchForm, setSearchForm] =
+    useState<SearchFormInterface>(initialSearch);
 
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
+  const updateForm = (key: string, val: number | string | Date): void => {
+    setSearchForm((prev) => ({ ...prev, [key]: val }));
+  };
+
+  const onSubmit = () => {
+    dispatch(updateSearchForm(searchForm));
+    navigate(`/hotel/${hotelId}/booking`);
+  };
+
+  const onSignInClick = () => {
+    dispatch(updateSearchForm(searchForm));
+    navigate("/signin");
+  };
 
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
       <h3 className="text-md font-bold">£{pricePerNight}</h3>
-      <form
-        onSubmit={isLoggedIn ? handleSubmit(() => {}) : handleSubmit(() => {})}
-      >
+      <form onSubmit={isLoggedIn ? onSubmit : onSignInClick}>
         <div className="grid grid-cols-1 gap-4 items-center">
           <div>
             <DatePicker
               required
-              selected={checkIn}
-              onChange={(date) => setValue("checkIn", date as Date)}
               selectsStart
-              startDate={checkIn}
-              endDate={checkOut}
+              selected={new Date(searchForm.checkinDate)}
+              onChange={(date) =>
+                updateForm("checkinDate", date?.toISOString() ?? "")
+              }
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in Date"
@@ -63,11 +63,11 @@ const GuestInfoForm = ({ pricePerNight }: Props) => {
           <div>
             <DatePicker
               required
-              selected={checkOut}
-              onChange={(date) => setValue("checkOut", date as Date)}
+              selected={new Date(searchForm.checkoutDate)}
+              onChange={(date) =>
+                updateForm("checkoutDate", date?.toISOString() ?? "")
+              }
               selectsStart
-              startDate={checkIn}
-              endDate={checkOut}
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in Date"
@@ -75,41 +75,33 @@ const GuestInfoForm = ({ pricePerNight }: Props) => {
               wrapperClassName="min-w-full"
             />
           </div>
-          <div className="flex bg-white px-2 py-1 gap-2">
-            <label className="items-center flex">
-              Adults:
+          <div className="flex flex-1 justify-between bg-white p-2">
+            <div className="flex w-1/2 items-center">
+              <label className="text-lg">Adult: </label>
               <input
-                className="w-full p-1 focus:outline-none font-bold"
+                value={searchForm.adultCount}
+                onChange={(e) => {
+                  if (+e.target.value > 0 || e.target.value === "") {
+                    updateForm("adultCount", e.target.value);
+                  }
+                }}
+                className="w-2/3 text-lg pl-1 font-bold focus: outline-none"
                 type="number"
-                min={1}
-                max={20}
-                {...register("adultCount", {
-                  required: "This field is required",
-                  min: {
-                    value: 1,
-                    message: "There must be at least one adult",
-                  },
-                  valueAsNumber: true,
-                })}
               />
-            </label>
-            <label className="items-center flex">
-              Children:
+            </div>
+            <div className="flex w-1/2 items-center">
+              <label className="text-lg">Child: </label>
               <input
-                className="w-full p-1 focus:outline-none font-bold"
+                value={searchForm.childCount}
+                onChange={(e) => {
+                  if (+e.target.value > 0 || e.target.value === "") {
+                    updateForm("childCount", e.target.value);
+                  }
+                }}
+                className="w-2/3 text-lg pl-1 font-bold focus: outline-none"
                 type="number"
-                min={0}
-                max={20}
-                {...register("childCount", {
-                  valueAsNumber: true,
-                })}
               />
-            </label>
-            {errors.adultCount && (
-              <span className="text-red-500 font-semibold text-sm">
-                {errors.adultCount.message}
-              </span>
-            )}
+            </div>
           </div>
           {isLoggedIn ? (
             <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
