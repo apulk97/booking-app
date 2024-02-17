@@ -1,13 +1,17 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout'
 import Confirmation from './pages/Confirmation'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import MyBookings from './pages/MyBookings'
+import Search from './pages/Search'
 import MyHotels from './pages/MyHotels'
 import Register from './pages/Register'
 import AddEditHotel from './pages/AddHotel'
+import HotelDetail from './pages/Detail'
+
 
 function App() {
 
@@ -19,6 +23,8 @@ function App() {
       <Route path='/register' element={<Layout><Register /></Layout>} />
       <Route path='/my-hotels' element={<Layout><MyHotels /></Layout>} />
       <Route path='/my-bookings' element={<Layout><MyBookings /></Layout>} />
+      <Route path='/search' element={<Layout><Search/></Layout>} />
+      <Route path="/detail/:hotelId" element={<Layout><HotelDetail/></Layout>} />
       <Route path='/hotel/:id/booking' element={<Layout><Confirmation /></Layout>} />
       <Route path='/add-hotel' element={<Layout><AddEditHotel/></Layout>} />
       <Route path='/edit-hotel/:hotelId' element={<Layout><AddEditHotel/></Layout>} />

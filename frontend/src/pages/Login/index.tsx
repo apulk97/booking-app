@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
 import { UserInterface } from "../Register/index.types";
 import { AppDispatch, RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,16 +30,16 @@ function Login() {
     }
   };
   return (
-    <div className="border border-solid border-black p-4 flex flex-col py-5 px-5">
+    <div className="border border-slate-300 rounded drop-shadow p-4 flex flex-col py-5 px-5">
       <h2 className="text-3xl font-bold px-0 py-2">Sign In</h2>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-3">
         <div className="form-field">
           <label className="text-gray-700 text-sm font-bold flex-1">
             Email Address
           </label>
           <input
             type="email"
-            className="border rounded w-full py-1 px-2 font-normal"
+            className="border rounded w-full py-1 px-2 font-normal focus:outline-none"
             value={formData.email}
             onChange={(e) => updateForm("email", e.target.value)}
           />
@@ -51,7 +50,7 @@ function Login() {
           </label>
           <input
             type="password"
-            className="border rounded w-full py-1 px-2 font-normal"
+            className="border rounded w-full py-1 px-2 font-normal focus:outline-none"
             value={formData.password}
             onChange={(e) => updateForm("password", e.target.value)}
           />
@@ -65,7 +64,7 @@ function Login() {
           </span>
           <button
             type="submit"
-            className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl border rounded "
+            className="bg-blue-600 text-white py-2 px-4 font-bold hover:bg-blue-500 text-xl "
           >
             Login
           </button>

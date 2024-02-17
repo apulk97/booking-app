@@ -7,6 +7,8 @@ import { v2 as cloudinary } from 'cloudinary'
 import userRoutes from './routes/users';
 import myHotelRoutes from './routes/my-hotels'
 import hotelRoutes from './routes/hotels'
+import bookingRoutes from './routes/my-bookings'
+import path from "path";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -20,9 +22,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/users', userRoutes)
-app.use('/my-hotels', myHotelRoutes)
-app.use('/hotels', hotelRoutes)
+app.use(express.static(path.join(__dirname, "../../frontend/dist")))
+
+app.use('/api/users', userRoutes)
+app.use('/api/my-hotels', myHotelRoutes)
+app.use('/api/hotels', hotelRoutes)
+app.use('/api/my-bookings', bookingRoutes)
 
 
 app.listen(8000, () => {
