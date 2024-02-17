@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 
 type Props = {
-  hotelId: string;
   pricePerNight: number;
 };
 
@@ -13,7 +12,7 @@ type GuestInfoFormData = {
   childCount: number;
 };
 
-const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
+const GuestInfoForm = ({ pricePerNight }: Props) => {
   const isLoggedIn = localStorage.getItem("profile");
 
   const {
@@ -24,10 +23,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     formState: { errors },
   } = useForm<GuestInfoFormData>({
     defaultValues: {
-      checkIn: "",
-      checkOut: "",
-      adultCount: "",
-      childCount: "",
+      checkIn: new Date(),
+      checkOut: new Date(),
+      adultCount: 1,
+      childCount: 1,
     },
   });
 

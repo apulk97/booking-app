@@ -27,7 +27,7 @@ function AddEditHotel() {
       }
       formData.append(key, value.toString())
     })
-    addHotel(formData).then((response) => navigate('/my-hotels'))
+    addHotel(formData).then(() => navigate('/my-hotels'))
   }
 
   useLayoutEffect(()=>{
