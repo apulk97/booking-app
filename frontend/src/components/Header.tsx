@@ -13,7 +13,7 @@ const Header = () => {
       <ToastContainer />
       <div className="container flex justify-between mx-auto">
         <span className="text-white font-bold text-3xl">
-          <Link to="/">MernHolidays.com</Link>
+          <Link to="/">Booking.com</Link>
         </span>
         {isLoggedIn ? (
           <nav className="flex gap-6">

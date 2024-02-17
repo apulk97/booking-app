@@ -18,7 +18,7 @@ export const myHotels = () => api.get("/my-hotels/get");
 export const addHotel = (data: FormData) => api.post("/my-hotels/add", data);
 export const getHotel = (id: string) => api.get(`/my-hotels/${id}`);
 
-export const searchHotels = () => api.get("/hotels/search");
+export const searchHotels = (queryParams: object) => api.get("hotels/search", { params: queryParams });
 export const getHotelById = (hotelId: string) => api.get(`/hotels/${hotelId}`);
 export const createPaymentIntent = (hotelId: string, numberOfNights: number) => api.post(`/hotels/${hotelId}/bookings/payment-intent`, { numberOfNights });
 export const bookRoom = (data: BookingFromReq, hotelId: string) => api.post(`/hotels/${hotelId}/bookings`, data);
