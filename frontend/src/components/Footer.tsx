@@ -6,7 +6,7 @@ function Footer() {
     <div className="bg-blue-800 py-6">
       <div className="container mx-auto flex justify-between">
         <span className="text-white font-bold text-3xl">
-          <Link to="/">MernHolidays.com</Link>
+          <Link to="/">Booking.com</Link>
         </span>
         <nav className="flex gap-6">
           <span className="text-white font-bold text-l">

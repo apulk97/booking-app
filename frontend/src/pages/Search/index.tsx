@@ -105,7 +105,7 @@ function Search() {
         </div>
       </div>
       <div>
-        <div>
+        <div className="flex flex-col gap-4">
           {loading && <div>Loading...</div>}
           {searchData?.data?.length === 0 ? (
             <div>No record found</div>
@@ -115,7 +115,7 @@ function Search() {
             ))
           )}
         </div>
-        <div>
+        <div className="pt-4">
           <Pagination
             page={searchData?.pagination.page || 1}
             pages={searchData?.pagination.pages || 1}

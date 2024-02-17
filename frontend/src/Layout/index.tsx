@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface Props {
 function Layout({ children }: Props) {
   return (
     <div className="flex flex-col min-h-screen">
+      <ToastContainer />
       <Header />
       <Hero />
       <div className="container mx-auto">

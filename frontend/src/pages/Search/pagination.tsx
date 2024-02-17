@@ -11,7 +11,7 @@ const Pagination = ({ page, pages, onPageChange }: Props) => {
   }
 
   const buttonStyle = {
-    padding: "10px",
+    padding: "4px 10px",
     border: "1px solid #ccc",
     backgroundColor: "#fff",
     cursor: "pointer",
