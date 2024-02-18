@@ -80,7 +80,7 @@ export default function HotelDetail() {
             <div className="whitespace-pre-line">{hotel.description}</div>
             <div className="h-fit">
               <GuestInfoForm
-              hotelId={hotelId}
+              hotelId={hotelId ?? ''}
             pricePerNight={hotel.pricePerNight}
           />
             </div>
