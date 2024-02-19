@@ -66,7 +66,7 @@ function AddEditHotel() {
             <GuestsSection />
             <ImagesSection />
             <div className="flex justify-end">
-              <button type="submit" className="text-white text-xl bg-blue-600 p-3 font-bold rounded-2xl px-6">
+              <button type="submit" className="text-white text-xl bg-blue-600 p-3 font-bold cursor-pointer px-6">
                 {hotelId ? 'Save Changes' : 'Add Hotel'}
               </button>
             </div>

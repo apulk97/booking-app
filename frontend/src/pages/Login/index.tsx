@@ -64,7 +64,7 @@ function Login() {
           </span>
           <button
             type="submit"
-            className="bg-blue-600 text-white py-2 px-4 font-bold hover:bg-blue-500 text-xl "
+            className="bg-blue-600 text-white py-2 px-4 font-bold hover:bg-blue-500 text-xl cursor-pointer"
           >
             Login
           </button>

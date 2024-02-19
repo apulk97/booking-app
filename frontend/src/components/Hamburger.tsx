@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineClose } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { AppDispatch } from "../store";
+import { useDispatch } from "react-redux";
+import { signout } from "../slices/authSlice";
 
 function Hamburger() {
   const [open, setOpen] = useState(false);
-  console.log({ open });
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <div className="flex flex-col items-end relative">
@@ -22,6 +25,11 @@ function Hamburger() {
           </span>
           <span className="text-blue-600 font-bold text-lg">
             <Link to="/my-hotels">My Hotels</Link>
+          </span>
+          <span className="text-blue-600 font-bold text-lg">
+          <button className="bg-white text-blue-600 font-bold" onClick={() => dispatch(signout())}>
+          <Link to="/">Sign Out</Link>
+        </button>
           </span>
         </div>
       )}

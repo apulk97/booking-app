@@ -75,7 +75,7 @@ function Register() {
         </div>
         </div>
         
-        <button className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl border rounded mx-5 my-5">
+        <button className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl border cursor-pointer m-5">
           <input type="submit" value={"Sign Up"} />
         </button>
       </form>

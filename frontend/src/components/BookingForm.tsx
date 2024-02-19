@@ -84,7 +84,7 @@ function BookingForm({ userData, paymentIntentData, searchData, hotelId }: Props
           <CardElement id="payment-element" className="border rounded-md p-2 text-sm" />
         </div>
         <div className="mt-3 flex justify-end">
-          <button type="submit" className=" bg-blue-600 text-white text-l font-bold p-2">
+          <button type="submit" className=" bg-blue-600 text-white text-l font-bold p-2 cursor-pointer">
             Confirm Booking
           </button>
         </div>

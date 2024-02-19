@@ -91,8 +91,8 @@ function Search() {
         />
       </div>
       <div className="flex flex-1 gap-1 sm:gap-3">
-        <button className="w-1/2 sm:w-2/3 bg-blue-600 text-white sm:text-xl font-bold p-2">Search</button>
-        <button className="w-1/2 sm:w-1/3 bg-red-600 text-white sm:text-xl font-bold p-2">Clear</button>
+        <button className="w-1/2 sm:w-2/3 bg-blue-600 text-white sm:text-xl font-bold p-2 cursor-pointer">Search</button>
+        <button className="w-1/2 sm:w-1/3 bg-red-600 text-white sm:text-xl font-bold p-2 cursor-pointer">Clear</button>
       </div>
     </form>
   );
