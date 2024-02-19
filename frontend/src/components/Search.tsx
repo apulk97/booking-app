@@ -76,7 +76,7 @@ function Search() {
           onChange={(date) => updateForm("checkinDate", date?.toISOString() ?? "")}
           minDate={minDate}
           maxDate={maxDate}
-          className="min-w-full bg-white p-3 focus:outline-none"
+          className="w-full sm:min-w-full bg-white p-3 focus:outline-none"
           wrapperClassName="min-w-full"
         />
       </div>
@@ -86,13 +86,13 @@ function Search() {
           onChange={(date) => updateForm("checkoutDate", date?.toISOString() ?? "")}
           minDate={minDate}
           maxDate={maxDate}
-          className="min-w-full bg-white p-3 focus:outline-none"
+          className="w-full sm:min-w-full bg-white p-3 focus:outline-none"
           wrapperClassName="min-w-full"
         />
       </div>
-      <div className="flex flex-1 gap-3">
-        <button className="w-2/3 bg-blue-600 text-white text-xl font-bold p-2">Search</button>
-        <button className="w-1/3 bg-red-600 text-white text-xl font-bold p-2">Clear</button>
+      <div className="flex flex-1 gap-1 sm:gap-3">
+        <button className="w-1/2 sm:w-2/3 bg-blue-600 text-white sm:text-xl font-bold p-2">Search</button>
+        <button className="w-1/2 sm:w-1/3 bg-red-600 text-white sm:text-xl font-bold p-2">Clear</button>
       </div>
     </form>
   );

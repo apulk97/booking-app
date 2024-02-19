@@ -31,7 +31,7 @@ app.use('/api/my-bookings', bookingRoutes)
 
 app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
-  });
+});
 
 app.listen(8000, () => {
     console.log('Server is listening on PORT 8000')

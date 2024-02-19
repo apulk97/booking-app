@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <div className="bg-blue-800 py-6">
-      <div className="container mx-auto flex justify-between">
+      <div className="container mx-auto flex flex-col sm:flex-row justify-between">
         <span className="text-white font-bold text-3xl">
           <Link to="/">Booking.com</Link>
         </span>

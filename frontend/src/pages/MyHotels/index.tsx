@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { HotelType } from '../../../../backend/src/shared/index.types';
 import * as api from '../../api/index';
 import MyHotelCard from '../../components/MyHotelCard';
+import { ToastContainer } from 'react-toastify';
 
 
 function MyHotels() {
@@ -19,6 +20,7 @@ function MyHotels() {
 
   return (
     <div>
+      <ToastContainer />
       <div className='flex justify-between'>
         <h1 className='text-3xl font-bold'>My Hotels</h1>
         <button className='text-white text-xl bg-blue-600 p-3 font-bold' onClick={()=>navigate('/add-hotel')}>Add Hotel</button>
