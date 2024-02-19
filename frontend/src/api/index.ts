@@ -34,7 +34,7 @@ export const getUserInfo = () => api.get("/api/users/me");
 export const myHotels = () => api.get("/api/my-hotels/get");
 export const addHotel = (data: FormData) => api.post("/api/my-hotels/add", data);
 export const editHotel = (id:string, data: FormData) => api.put(`/api/my-hotels/${id}`, data);
-export const getHotel = (id: string) => api.get(`/my-hotels/${id}`);
+export const getHotel = (id: string) => api.get(`/api/my-hotels/${id}`);
 
 export const searchHotels = (queryParams: object) => api.get("/api/hotels/search", { params: queryParams });
 export const getHotelById = (hotelId: string) => api.get(`/api/hotels/${hotelId}`);
