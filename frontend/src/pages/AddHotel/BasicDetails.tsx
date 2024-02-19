@@ -35,7 +35,6 @@ const BasicDetails = () => {
             className="w-full border-2 rounded p-1 px-2"
             {...register('description', {
               required: 'Description is required',
-              maxLength: { message: 'Decription cannot be more than 200 chars', value: 200 },
             })}
           />
           {errors.description && <span className="text-red-500">{errors.description.message}</span>}
