@@ -39,8 +39,8 @@ const SearchResultsCard = ({ hotel }: Props) => {
           <div className="line-clamp-4">{hotel.description}</div>
         </div>
 
-        <div className="grid grid-cols-2 items-end whitespace-nowrap">
-          <div className="flex gap-1 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-end whitespace-nowrap">
+          <div className="flex gap-1 items-center md:justify-between flex-wrap">
             {(hotel?.facilities ?? []).slice(0, 3).map((facility: string) => (
               <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap">
                 {facility}
