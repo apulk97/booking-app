@@ -23,7 +23,7 @@ function Home() {
 
   return (
     <>
-    {Boolean(name) ? <h2 className="text-2xl font-bold">Welcome, {name}</h2> : <span className="text-xl">Please sign in to add your own hotels</span>}
+    {Boolean(name) ? <h2 className="text-2xl font-bold">Welcome, {name}</h2> : <p className="text-xl">Please sign in to add your own hotels.</p>}
     <span className="pt-4">Check out the most recent destinations added by our hosts.</span>
     <div className="grid md:grid-cols-2 gap-6 pt-4">
       {hotels.map((item) => (<LatestHotelCard hotel = {item}/>))}
