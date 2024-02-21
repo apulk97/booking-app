@@ -64,21 +64,15 @@ function Search() {
     const starRating = event.target.value;
 
     setSelectedStars((prevStars) =>
-      event.target.checked
-        ? [...prevStars, starRating]
-        : prevStars.filter((star) => star !== starRating)
+      event.target.checked ? [...prevStars, starRating] : prevStars.filter((star) => star !== starRating)
     );
   };
 
-  const handleHotelTypeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleHotelTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const hotelType = event.target.value;
 
     setSelectedHotelTypes((prevHotelTypes) =>
-      event.target.checked
-        ? [...prevHotelTypes, hotelType]
-        : prevHotelTypes.filter((hotel) => hotel !== hotelType)
+      event.target.checked ? [...prevHotelTypes, hotelType] : prevHotelTypes.filter((hotel) => hotel !== hotelType)
     );
   };
 
@@ -96,25 +90,11 @@ function Search() {
     <div className="flex flex-row justify-between flex-1">
       <div style={{ margin: 5, flex: window.innerWidth < 1024 ? 1 : 1 }}>
         <div className="space-y-5 rounded-lg border border-slate-300 p-5 h-fit top-10 sticky ">
-          <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
-            Filter by:
-          </h3>
-          <StarRatingFilter
-            selectedStars={selectedStars}
-            onChange={handleStarsChange}
-          />
-          <HotelTypesFilter
-            selectedHotelTypes={selectedHotelTypes}
-            onChange={handleHotelTypeChange}
-          />
-          <FacilitiesFilter
-            selectedFacilities={selectedFacilities}
-            onChange={handleFacilityChange}
-          />
-          <PriceFilter
-            selectedPrice={selectedPrice}
-            onChange={(value?: number) => setSelectedPrice(value)}
-          />
+          <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">Filter by:</h3>
+          <StarRatingFilter selectedStars={selectedStars} onChange={handleStarsChange} />
+          <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onChange={handleHotelTypeChange} />
+          <FacilitiesFilter selectedFacilities={selectedFacilities} onChange={handleFacilityChange} />
+          <PriceFilter selectedPrice={selectedPrice} onChange={(value?: number) => setSelectedPrice(value)} />
         </div>
       </div>
       <div style={{ margin: 5, flex: window.innerWidth < 1024 ? 2 : 4 }}>
@@ -123,18 +103,18 @@ function Search() {
           {searchData?.data?.length === 0 ? (
             <div>No record found</div>
           ) : (
-            searchData?.data?.map((item: any, index: number) => (
-              <SearchResultsCard key={index} hotel={item} />
-            ))
+            searchData?.data?.map((item: any, index: number) => <SearchResultsCard key={index} hotel={item} />)
           )}
         </div>
-        <div className="pt-4">
-          <Pagination
-            page={searchData?.pagination.page || 1}
-            pages={searchData?.pagination.pages || 1}
-            onPageChange={(page) => setPage(page)}
-          />
-        </div>
+        {Boolean(searchData?.data?.length) && (
+          <div className="pt-4">
+            <Pagination
+              page={searchData?.pagination.page || 1}
+              pages={searchData?.pagination.pages || 1}
+              onPageChange={(page) => setPage(page)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

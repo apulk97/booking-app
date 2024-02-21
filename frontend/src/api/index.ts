@@ -1,12 +1,6 @@
 import axios from "axios";
 import { UserInterface } from "../pages/Register/index.types";
 import { BookingFromReq } from "../types/index.types";
-import { useDispatch } from "react-redux";
-import { signout } from "../slices/authSlice";
-import { useNavigate } from "react-router-dom";
-// const dispatch = useDispatch()
-// const navigate = useNavigate();
-
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""
 const api = axios.create({ baseURL: API_BASE_URL });
@@ -37,6 +31,7 @@ export const editHotel = (id:string, data: FormData) => api.put(`/api/my-hotels/
 export const getHotel = (id: string) => api.get(`/api/my-hotels/${id}`);
 
 export const searchHotels = (queryParams: object) => api.get("/api/hotels/search", { params: queryParams });
+export const getLatestHotels = () => api.get("/api/hotels/latestHotels")
 export const getHotelById = (hotelId: string) => api.get(`/api/hotels/${hotelId}`);
 export const createPaymentIntent = (hotelId: string, numberOfNights: number) => api.post(`/api/hotels/${hotelId}/bookings/payment-intent`, { numberOfNights });
 export const bookRoom = (data: BookingFromReq, hotelId: string) => api.post(`/api/hotels/${hotelId}/bookings`, data);

@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import * as api from "../../api/index";
 import GuestInfoForm from "./guestInfoForm";
+import { HotelType } from "../../types/index.types";
 
 export default function HotelDetail() {
   const { hotelId } = useParams();
-  const [hotel, setHotel] = useState<any>(null);
+  const [hotel, setHotel] = useState<HotelType>();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchHotel = async () => {

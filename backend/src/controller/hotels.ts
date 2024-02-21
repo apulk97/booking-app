@@ -28,7 +28,7 @@ export const getAllHotels = async (req: Request, res: Response) => {
   const query = constructQuery(req.query);
   try {
     const hotels = await Hotel.find(query).sort(sortOptions).skip(skip).limit(pageSize);
-    const total = await Hotel.countDocuments();
+    const total = await Hotel.countDocuments(query);
     const response: HotelsPagination = {
       data: hotels,
       pagination: {
@@ -43,6 +43,15 @@ export const getAllHotels = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const getLatestHotels = async(req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find().sort('-lastUpdated').limit(6)
+    res.status(200).json(hotels)
+  } catch (err) {
+    res.status(500).json({message: "Internal Server Error"})
+  }
+}
 
 export const getHotelById = async (req: Request, res: Response) => {
   const hotelId = req.params.id?.toString() ?? "";
