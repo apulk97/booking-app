@@ -4,14 +4,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { SearchFormInterface, initialSearch, updateSearchForm } from "../slices/searchSlice";
+import {
+  SearchFormInterface,
+  initialSearch,
+  updateSearchForm,
+} from "../slices/searchSlice";
 import { AppDispatch } from "../store";
 
 function Search() {
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
-  const [searchForm, setSearchForm] = useState<SearchFormInterface>(initialSearch);
+  const [searchForm, setSearchForm] =
+    useState<SearchFormInterface>(initialSearch);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,7 +31,7 @@ function Search() {
       return;
     }
     dispatch(updateSearchForm(searchForm));
-    navigate("/search");
+    setTimeout(() => navigate("/search"), 1000);
   };
 
   return (
@@ -48,7 +53,7 @@ function Search() {
           <input
             value={searchForm.adultCount}
             onChange={(e) => {
-              if (+e.target.value > 0  || e.target.value === '') {
+              if (+e.target.value > 0 || e.target.value === "") {
                 updateForm("adultCount", e.target.value);
               }
             }}
@@ -61,7 +66,7 @@ function Search() {
           <input
             value={searchForm.childCount}
             onChange={(e) => {
-              if (+e.target.value > 0 || e.target.value === '') {
+              if (+e.target.value > 0 || e.target.value === "") {
                 updateForm("childCount", e.target.value);
               }
             }}
@@ -73,7 +78,9 @@ function Search() {
       <div className="flex">
         <DatePicker
           selected={new Date(searchForm.checkinDate)}
-          onChange={(date) => updateForm("checkinDate", date?.toISOString() ?? "")}
+          onChange={(date) =>
+            updateForm("checkinDate", date?.toISOString() ?? "")
+          }
           minDate={minDate}
           maxDate={maxDate}
           className="w-full sm:min-w-full bg-white p-3 focus:outline-none"
@@ -83,7 +90,9 @@ function Search() {
       <div className="flex">
         <DatePicker
           selected={new Date(searchForm.checkoutDate)}
-          onChange={(date) => updateForm("checkoutDate", date?.toISOString() ?? "")}
+          onChange={(date) =>
+            updateForm("checkoutDate", date?.toISOString() ?? "")
+          }
           minDate={minDate}
           maxDate={maxDate}
           className="w-full sm:min-w-full bg-white p-3 focus:outline-none"
@@ -91,8 +100,12 @@ function Search() {
         />
       </div>
       <div className="flex flex-1 gap-1 sm:gap-3">
-        <button className="w-1/2 sm:w-2/3 bg-blue-600 text-white sm:text-xl font-bold p-2 cursor-pointer">Search</button>
-        <button className="w-1/2 sm:w-1/3 bg-red-600 text-white sm:text-xl font-bold p-2 cursor-pointer">Clear</button>
+        <button className="w-1/2 sm:w-2/3 bg-blue-600 text-white sm:text-xl font-bold p-2 cursor-pointer">
+          Search
+        </button>
+        <button className="w-1/2 sm:w-1/3 bg-red-600 text-white sm:text-xl font-bold p-2 cursor-pointer">
+          Clear
+        </button>
       </div>
     </form>
   );

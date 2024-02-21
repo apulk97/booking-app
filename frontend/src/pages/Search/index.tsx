@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
+import { RootState } from "../../store";
 import * as api from "../../api/index";
 import FacilitiesFilter from "./facilitiesFilter";
 import HotelTypesFilter from "./hotelTypesFilter";
@@ -16,14 +18,18 @@ function Search() {
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
-  const [flexValueFirst, setFlexValueFirst] = useState(1);
-  const [flexValueSecond, setFlexValueSecond] = useState(4);
+  const { search } = useSelector((state: RootState) => state.search);
 
   useEffect(() => {
     const fetchSearch = async () => {
       setLoading(true);
       try {
         const SearchParams = {
+          destination: search.destination,
+          adultCount: search.adultCount,
+          childCount: search.childCount,
+          checkinDate: search.checkinDate,
+          checkoutDate: search.checkoutDate,
           page: page,
           stars: selectedStars,
           types: selectedHotelTypes,
@@ -47,6 +53,11 @@ function Search() {
     selectedHotelTypes,
     selectedFacilities,
     selectedPrice,
+    search.destination,
+    search.adultCount,
+    search.childCount,
+    search.checkinDate,
+    search.checkoutDate,
   ]);
 
   const handleStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
